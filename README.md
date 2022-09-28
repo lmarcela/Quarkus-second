@@ -64,3 +64,9 @@ Create your first JPA entity
 Easily start your Reactive RESTful Web Services
 
 [Related guide section...](https://quarkus.io/guides/getting-started-reactive#reactive-jax-rs-resources)
+
+### Docker compilation
+1. ./mvnw package
+2. docker build -f src/main/docker/Dockerfile.jvm -t quarkus/code-with-quarkus-jvm .
+3. docker run -d --name product -p 8081:8081 quarkus/code-with-quarkus-jvm
+4. Go to http://localhost:8081/q/swaggerui
