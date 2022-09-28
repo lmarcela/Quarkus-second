@@ -17,19 +17,36 @@ public class ProductApi {
     ProductRepository productRepository;
 
     @GET
-    public List<Product> list(){
+    public List<Product> list() {
         return productRepository.listProduct();
     }
 
+    @GET
+    @Path("/{Id}")
+    public Product getById(@QueryParam("Id") Long Id) {
+        return productRepository.findProduct(Id);
+    }
+
     @POST
-    public Response add(Product product){
+    public Response add(Product product) {
         productRepository.createProduct(product);
         return Response.ok().build();
     }
 
     @DELETE
-    public Response delete(Product product){
-        productRepository.deleteProduct(product);
+    @Path("/{Id}")
+    public Response delete(@QueryParam("Id") Long Id) {
+        productRepository.deleteProduct( productRepository.findProduct(Id));
+        return Response.ok().build();
+    }
+
+    @PUT
+    public Response update(Product p) {
+        Product product = productRepository.findProduct(p.getId());
+        product.setCode(p.getCode());
+        product.setName(p.getName());
+        product.setDescription(p.getDescription());
+        productRepository.updateProduct(product);
         return Response.ok().build();
     }
 }
