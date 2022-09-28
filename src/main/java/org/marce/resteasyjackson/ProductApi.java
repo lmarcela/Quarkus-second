@@ -23,7 +23,7 @@ public class ProductApi {
 
     @GET
     @Path("/{Id}")
-    public Product getById(@QueryParam("Id") Long Id) {
+    public Product getById(@PathParam("Id") Long Id) {
         return productRepository.findProduct(Id);
     }
 
@@ -35,7 +35,7 @@ public class ProductApi {
 
     @DELETE
     @Path("/{Id}")
-    public Response delete(@QueryParam("Id") Long Id) {
+    public Response delete(@PathParam("Id") Long Id) {
         productRepository.deleteProduct( productRepository.findProduct(Id));
         return Response.ok().build();
     }
